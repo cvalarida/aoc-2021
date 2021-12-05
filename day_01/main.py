@@ -11,7 +11,11 @@ def puzzle_1(puzzle_input):
 
 
 def puzzle_2(puzzle_input):
-    print("Haven't done this yet.")
+    inputs = []
+    for i in range(2, len(puzzle_input)):
+        inputs.append(puzzle_input[i] + puzzle_input[i - 1] + puzzle_input[i - 2])
+
+    puzzle_1(inputs)
 
 
 def run_puzzle(p, puzzle_input):
