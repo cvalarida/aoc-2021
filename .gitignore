@@ -9,4 +9,4 @@ build
 htmlcov
 
 cookie.env
-input/*
+inputs/*
