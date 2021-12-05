@@ -18,7 +18,21 @@ def puzzle_1(commands):
 
 
 def puzzle_2(commands):
-    pass
+    x = 0
+    y = 0
+    aim = 0
+    for command, value in commands:
+        value = int(value)
+        if command == "forward":
+            x += value
+            y += aim * value
+        if command == "down":
+            aim += value
+        if command == "up":
+            aim -= value
+
+    solution = x * y
+    print(solution)
 
 
 def run_puzzle(p, puzzle_input):
