@@ -6,6 +6,7 @@
 import argparse
 import os
 import day_01.main
+from helpers.get_input import get_input
 
 parser = argparse.ArgumentParser(description="Run a puzzle from a day.")
 parser.add_argument("-d", help="The day", type=int, metavar="day")
@@ -19,8 +20,9 @@ if not os.path.exists(f"inputs/{args.d}.txt"):
     print(f"Found no puzzle input for day {args.d}. Fetching...")
     os.system(f"./get-input.sh {args.d}")
 
+puzzle_input = get_input(args.d)
 
 if args.d == 1:
-    day_01.main.run_puzzle(args.p)
+    day_01.main.run_puzzle(args.p, puzzle_input)
 else:
     print(f"I can't find a function for day {args.d}")
