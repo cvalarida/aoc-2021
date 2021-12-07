@@ -14,9 +14,7 @@ def bits_to_dec(bits):
 # Iterate through the bits and add the bits[pos] together
 # Compare to the len(data)
 def most_common(data, pos):
-    count = 0
-    for bits in data:
-        count += bits[pos]
+    count = count_ones(data, pos)
     return int(count > len(data) / 2)  # What if they're even?
 
 
@@ -34,8 +32,64 @@ def puzzle_1(data):
     print(gamma_dec * epsilon_dec)
 
 
+def count_ones(data, pos):
+    count = 0
+    for bits in data:
+        count += bits[pos]
+    return count
+
+
+# def filter_by_commonality(data, pos, value):
+#     # Return only items in the array whose bit at the position is equal to the value
+#     result = []
+#     # Get the common bit
+#     ones = count_ones(data, pos)
+#     # If:
+#     #   - The current bit matches the majority bit
+#     #   - There is no majority bit and the current bit is 1
+#     for d in data:
+#         if ones >= len(data) / 2:
+#             # Ones are the most common (or equal)
+#             if value == "most" and d[pos] == 1:
+#                 result.append(d)
+#         if ones <= len(data) / 2:
+#             # Zeros are the most common (or equal)
+#     return result
+
+
+def get_most_common(data, pos):
+    result = []
+    ones = count_ones(data, pos)
+    keep_bit = 0 if ones < len(data) / 2 else 1
+    for d in data:
+        if d[pos] == keep_bit:
+            result.append(d)
+    return result
+
+
+def get_least_common(data, pos):
+    result = []
+    ones = count_ones(data, pos)
+    keep_bit = 1 if ones < len(data) / 2 else 0
+    for d in data:
+        if d[pos] == keep_bit:
+            result.append(d)
+    return result
+
+
 def puzzle_2(data):
-    pass
+    oxygen_list = data
+    co2_list = data
+
+    for i in range(len(data[0])):
+        oxygen_list = get_most_common(oxygen_list, i)
+    for i in range(len(data[0])):
+        co2_list = get_least_common(co2_list, i)
+        if len(co2_list) == 1:
+            break
+
+    result = bits_to_dec(oxygen_list[0]) * bits_to_dec(co2_list[0])
+    print(result)
 
 
 def run_puzzle(p, puzzle_input):
