@@ -10,8 +10,21 @@ def puzzle_1(numbers, boards):
                 return  # The ith board won first!
 
 
-def puzzle_2(numbers, tables):
-    pass
+def puzzle_2(numbers, boards):
+    table_wins = [False] * len(boards)
+    last_board_won = -1
+    winning_number = -1
+    for n in numbers:
+        for i in range(len(boards)):
+            if not table_wins[i] and boards[i].mark(n):
+                # This board just won for the firs time!
+                last_board_won = i
+                winning_number = n
+                table_wins[i] = True
+                if all(table_wins):
+                    break  # Just...stop if we can
+
+    print(boards[last_board_won].unmarked_sum() * winning_number)
 
 
 def parse_input(puzzle_input):
