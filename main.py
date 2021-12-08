@@ -33,6 +33,8 @@ if args.d == 2:
 if args.d == 3:
     day_03.main.run_puzzle(args.p, puzzle_input)
 if args.d == 4:
-    day_04.main.run_puzzle(args.p, puzzle_input)
+    day_04.main.run_puzzle(
+        args.p, "\n".join(puzzle_input)
+    )  # This puzzle takes the raw input
 else:
     print(f"I can't find a function for day {args.d}")

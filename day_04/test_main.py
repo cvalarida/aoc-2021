@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from .main import parse_input
+from .board import Board
 
 
 puzzle_input = """7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
@@ -23,6 +24,38 @@ puzzle_input = """7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,1
 22 11 13  6  5
  2  0 12  3  7"""
 
+number_input = [
+    7,
+    4,
+    9,
+    5,
+    11,
+    17,
+    23,
+    2,
+    0,
+    14,
+    21,
+    24,
+    10,
+    16,
+    13,
+    6,
+    15,
+    25,
+    12,
+    22,
+    18,
+    20,
+    8,
+    19,
+    3,
+    26,
+    1,
+]
+
 
 def test_parse_input():
-    pass
+    numbers, boards = parse_input(puzzle_input)
+    assert numbers == number_input
+    assert all([isinstance(b, Board) for b in boards])
