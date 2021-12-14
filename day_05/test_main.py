@@ -84,5 +84,21 @@ def test_draw_vents():
     assert draw_vents(parse_input(puzzle_input)) == ocean_floor
 
 
+def test_draw_vents_diagonals():
+    ocean_floor = [
+        [1, 0, 1, 0, 0, 0, 0, 1, 1, 0,],
+        [0, 1, 1, 1, 0, 0, 0, 2, 0, 0,],
+        [0, 0, 2, 0, 1, 0, 1, 1, 1, 0,],
+        [0, 0, 0, 1, 0, 2, 0, 2, 0, 0,],
+        [0, 1, 1, 2, 3, 1, 3, 2, 1, 1,],
+        [0, 0, 0, 1, 0, 2, 0, 0, 0, 0,],
+        [0, 0, 1, 0, 0, 0, 1, 0, 0, 0,],
+        [0, 1, 0, 0, 0, 0, 0, 1, 0, 0,],
+        [1, 0, 0, 0, 0, 0, 0, 0, 1, 0,],
+        [2, 2, 2, 1, 1, 1, 0, 0, 0, 0,],
+    ]
+    assert draw_vents(parse_input(puzzle_input), True) == ocean_floor
+
+
 def test_puzzle_1():
     assert puzzle_1(parse_input(puzzle_input)) == 5
