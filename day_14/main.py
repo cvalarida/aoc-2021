@@ -10,12 +10,12 @@ def puzzle_1(template, rules):
     # sorted = elements.most_common()
     # return sorted[0] - sorted[-1]
     total_elements = Counter()
+    total_elements[template[0]] += 1  # Don't forget to count the first element
     print(f"Total length: {len(template)}")
     for i in range(len(template) - 1):
         polymer = grow_polymer(template[i : i + 2], rules, 10)
         print(f"i: {i} ({template[i: i + 2]} -> {len(polymer)})")
         total_elements = total_elements + count_elements(polymer)
-    total_elements[template[0]] += 1  # Don't forget to count the first element
 
     sorted = total_elements.most_common()
     return sorted[0][1] - sorted[-1][1]
