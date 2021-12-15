@@ -13,6 +13,8 @@ import day_03.main
 import day_04.main
 import day_05.main
 import day_06.main
+import day_07.main
+import day_14.main
 
 parser = argparse.ArgumentParser(description="Run a puzzle from a day.")
 parser.add_argument("-d", help="The day", type=int, metavar="day")
@@ -42,5 +44,9 @@ if args.d == 5:
     day_05.main.run_puzzle(args.p, puzzle_input)
 if args.d == 6:
     day_06.main.run_puzzle(args.p, puzzle_input)
+if args.d == 7:
+    day_07.main.run_puzzle(args.p, puzzle_input)
+if args.d == 14:
+    day_14.main.run_puzzle(args.p, puzzle_input)
 else:
     print(f"I can't find a function for day {args.d}")
