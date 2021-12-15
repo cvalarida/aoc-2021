@@ -5,10 +5,6 @@ from .rules import InsertionRules
 
 
 def puzzle_1(template, rules):
-    # polymer = grow_polymer(template, rules, 80)
-    # elements = count_elements(polymer)
-    # sorted = elements.most_common()
-    # return sorted[0] - sorted[-1]
     total_elements = Counter()
     total_elements[template[0]] += 1  # Don't forget to count the first element
     print(f"Total length: {len(template)}")
@@ -22,7 +18,20 @@ def puzzle_1(template, rules):
 
 
 def puzzle_2(template, rules):
-    pass
+    total_elements = Counter()
+    total_elements[template[0]] += 1  # Don't forget to count the first letter
+    print(f"Total length: {len(template)}")
+    for i in range(len(template) - 1):
+        polymer = grow_polymer(template[i : i + 2], rules, 20)
+        print(f"i: {i} ({template[i: i + 2]} -> {len(polymer)})")
+
+        for j in range(len(polymer) - 1):
+            second_polymer = grow_polymer(polymer[j : j + 2], rules, 20)
+            total_elements = total_elements + count_elements(second_polymer)
+
+    sorted = total_elements.most_common()
+    print(sorted)
+    return sorted[0][1] - sorted[-1][1]
 
 
 def memoize_count(func):
@@ -53,6 +62,7 @@ def memoize_grow(func):
 
     def inner(template, rules, steps):
         if f"{template}-{steps}" not in memory:
+            print(f"grow_polymer cache miss: {template}-{steps}")
             memory[f"{template}-{steps}"] = func(template, rules, steps)
         return memory[f"{template}-{steps}"]
 
@@ -63,6 +73,7 @@ def memoize_grow(func):
 def grow_polymer(template, rules, steps):
     polymer = template
     for s in range(steps):
+        print(f"grow_polymer: loop {s}")
         new_polymer = [polymer[0]]  # Start with the first character
         for i in range(len(polymer) - 1):
             current_pair = polymer[i : i + 2]
